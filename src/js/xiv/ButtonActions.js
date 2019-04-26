@@ -42,19 +42,31 @@ class ButtonActions
             }
         });
 
+        $html.on('click', '#Finddiscord', event => {
+            const discordPath = dialog.showOpenDialog({
+                properties: ['openDirectory']
+            });
+
+            if (discordPath) {
+                document.getElementById('discord').value = discordPath[0].trim();
+            }
+        });
+
         $html.on('click', '#SaveSettings', event => {
             const gamePath = document.getElementById('gamePath').value.trim();
             const expansion = document.getElementById('expansion').value.trim();
             const language = document.getElementById('language').value.trim();
             const region = document.getElementById('region').value.trim();
             const raelyslanguage = document.getElementById('raelysLanguage').value.trim();
+            const discordPath = document.getElementById('discord').value.trim();
 
             SettingsManager.saveSettings({
                 gamePath: gamePath,
                 expansion: expansion,
                 language: language,
                 region: region,
-                raelysLanguage: raelyslanguage
+                raelysLanguage: raelyslanguage,
+                discord : discordPath
             });
 
             document.getElementById('settings-form').classList.remove('open');

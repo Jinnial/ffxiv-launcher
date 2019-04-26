@@ -18,6 +18,7 @@ module.exports = {
         },
         // Characters
         checkCharacterExpiryDelay: 60000,
+        discord: ""
     },
     // Square-Enix specific options
     se: {
@@ -68,5 +69,5 @@ module.exports = {
         1: 'Japanese Message',
         2: 'ESRB Rating Message',
         3: 'No Message' //Data Center working
-    },
+    }
 };

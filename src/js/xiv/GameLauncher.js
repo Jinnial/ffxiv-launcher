@@ -93,10 +93,50 @@ class GameLauncher
     }
 
     /**
+     * Launches the DRP engine if installed
+     */
+    launchDRP(){
+        
+
+        if(path === ""){
+            return true;
+        }
+
+        if (!fs.existsSync(path) ) {
+            Notice.show("We were unable to locate your discord Rich Presence instalation. Please update it's location via the settings.");
+            return false;
+        }
+
+        const options = {
+            detached: true,
+            stdio: 'ignore'
+        };
+
+        require('child_process').spawn(path + "FFXIVRichPresenceRunner.exe", options);        
+    }
+
+    /**
      * Launch the game using the session id
      */
     launchGame(userSid)
     {
+        const options = {
+            detached: true,
+            stdio: 'ignore'
+        };
+        
+        const path = Settings.custom.discord;
+        if(path !== ""){
+            if (!fs.existsSync(path) ) {
+                Notice.show("We were unable to locate your discord Rich Presence instalation. Please update it's location via the settings.");
+                return false;
+            } else {
+                Notice.show('<p>Loading discord Rich Presence Engine......</p>');
+                require('child_process').spawn(path + "/FFXIVRichPresenceRunner.exe", options);  
+            }
+        }
+
+        // start game
         const gameFilename = Settings.se.GamePath + Settings.se.Dx11Path;
         if (!fs.existsSync(gameFilename)) {
             Notice.show("Your game path could not be found, please update it via the settings.");
@@ -127,11 +167,6 @@ class GameLauncher
             'SYS.Region=' + region,
             'ver=' + GameFiles.version()
         ];
-
-        const options = {
-            detached: true,
-            stdio: 'ignore'
-        };
 
         require('child_process').spawn(gameFilename, gameArguments, options);
     }

@@ -9,6 +9,7 @@ class SettingsManager
         // List of custom settings
         this.custom = {
             gamePath: null,
+            discord: null
         };
 
         this.directory = app.getPath('userData') + '/data/';
@@ -22,6 +23,7 @@ class SettingsManager
 
     loadSettings()
     {
+        console.log(this.directory + this.filename)
         // create directory if it does not exist
         if (!fs.existsSync(this.directory)){
             fs.mkdirSync(this.directory);
@@ -44,6 +46,7 @@ class SettingsManager
         Settings.region = this.custom.region; //Game Language
         Settings.RaelysAPILanguage = this.custom.raelysLanguage;
         Settings.expansion = this.custom.expansion;
+        Settings.custom.discord = this.custom.discord;
         
         // populate forms
         for (let option in this.custom) {

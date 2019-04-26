@@ -24,7 +24,9 @@
   },
   "scripts": {
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "app": "electron .",
+    "dev": "yarn run encore dev --watch"
   },
   "dependencies": {
     "keytar": "^4.3.0",

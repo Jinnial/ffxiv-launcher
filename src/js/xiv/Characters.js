@@ -255,7 +255,7 @@ class Characters
         const otp = $('#otp2').val();
 
         // login to character
-        Login.login(character.username, character.password, otp, response => {
+        Login.login(character.username, character.password, otp, response => {            
             // launch game!
             Notice.show('<h1>Starting Game</h1><p>Launching game!</p>');
             GameLauncher.launchGame(response.userRealSid);
